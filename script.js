@@ -42,3 +42,24 @@ function operate(operator, a, b){
     }
 }
 
+let displayValue = "";
+let lastInputValue = ""
+
+
+function refreshDisplay(){
+    const display = document.querySelector('.calculator-screen');
+    display.textContent += lastInputValue;
+}
+
+function addBtnFunctionality(){
+    const btns = document.querySelectorAll('li');
+    btns.forEach(button => {
+        button.addEventListener('click', () => {
+            displayValue += button.id;
+            lastInputValue = button.id;
+            refreshDisplay();
+        })
+    })
+}
+
+addBtnFunctionality();
