@@ -22,9 +22,10 @@ function divide(a, b){
     b = +b;
     if (b === 0){
         alert("You can't divide by zero 😡");
-        const display = document.querySelector('.calculator-screen');
-        document.textContent = "";
-        displayValue = "";
+        display.textContent = "";
+        leftOperand = "";
+        rightOperand = "";
+        operator = "";
         return "";
     }
     return a / b;
@@ -47,49 +48,73 @@ function operate(a, b, operator){
     }
 }
 
-let displayValue = "";
-let lastInputValue = ""
+const display = document.querySelector('.calculator-screen');
+const numBtns = document.querySelectorAll('.number');
+const equalBtn = document.querySelector("#equal");
+const clearBtn = document.querySelector('#clear');
+const operatorBtns = document.querySelectorAll('.operator');
 
+let leftOperand = "";
+let rightOperand = "";
+let operator = "";
 
-function refreshDisplay(){
-    const display = document.querySelector('.calculator-screen');
-    display.textContent += lastInputValue;
+function refreshDisplay(result){
+    if(arguments.length === 0){
+        display.textContent = leftOperand + operator + rightOperand;
+    } else {
+        display.textContent = result;
+    }
+}
+
+function clearDisplay(){
+    display.textContent = "";
 }
 
 function addNumBtnFunctionality(){
-    const btns = document.querySelectorAll('li');
-    btns.forEach(button => {
+    numBtns.forEach(button => {
         button.addEventListener('click', () => {
-            displayValue += button.textContent;
-            lastInputValue = button.textContent;
+            if(operator.length === 0){
+                leftOperand += button.textContent;
+            } else {
+                rightOperand += button.textContent;
+            }        
+            refreshDisplay();
+        })
+    })
+}
+
+function addOperatorBtnFunctionality(){
+    operatorBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            operator = button.textContent;
             refreshDisplay();
         })
     })
 }
 
 function addClearBtnFunctionality(){
-    const btn = document.querySelector('#clear');
-    btn.addEventListener('click', () => {
-        displayValue = "";
-        lastInputValue = "";
+    clearBtn.addEventListener('click', () => {
+        leftOperand = "";
+        rightOperand = "";
+        operator = "";
         clearDisplay();
     })
 }
 
-function clearDisplay(){
-    const display = document.querySelector('.calculator-screen');
-    display.textContent = "";
-}
-
 function addEqualBtnFunctionality(){
-    const btn = document.querySelector("#equal");
-    btn.addEventListener('click', () => {
-        let [a, b, operator] = parseInput(displayValue);
-        let result = operate(a, b, operator);
-        // console.log(result);
-        const display = document.querySelector('.calculator-screen');
-        display.textContent = result;
-        displayValue = result;
+    equalBtn.addEventListener('click', () => {
+        console.log(leftOperand, operator, rightOperand);
+        let result = operate(leftOperand, rightOperand, operator);
+        refreshDisplay(result);
+        leftOperand = result;
+        rightOperand = "";
+        console.log(result);
+        // let [a, b, operator] = parseInput(displayValue);
+        // let result = operate(a, b, operator);
+        // // console.log(result);
+        // const display = document.querySelector('.calculator-screen');
+        // display.textContent = result;
+        // displayValue = result;
     })
 }
 
@@ -110,5 +135,6 @@ function parseInput(str){
 }
 
 addNumBtnFunctionality();
-addClearBtnFunctionality();
+addOperatorBtnFunctionality();
 addEqualBtnFunctionality();
+addClearBtnFunctionality();
