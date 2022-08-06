@@ -99,7 +99,7 @@ function parseInput(str){
     let right = ""
     let operator = "";
     for(let i = 0; i < str.length; i++){ // TO MOŻNA ZROBIĆ str.split()!!
-        if(operators.includes(str[i])){
+        if(operators.includes(str[i])){  // i zrobić to na osobnym branchu
             left = str.slice(0, i);
             right = str.slice(i + 1, -1);
             operator = str[i];
