@@ -103,35 +103,11 @@ function addClearBtnFunctionality(){
 
 function addEqualBtnFunctionality(){
     equalBtn.addEventListener('click', () => {
-        console.log(leftOperand, operator, rightOperand);
         let result = operate(leftOperand, rightOperand, operator);
         refreshDisplay(result);
         leftOperand = result;
         rightOperand = "";
-        console.log(result);
-        // let [a, b, operator] = parseInput(displayValue);
-        // let result = operate(a, b, operator);
-        // // console.log(result);
-        // const display = document.querySelector('.calculator-screen');
-        // display.textContent = result;
-        // displayValue = result;
     })
-}
-
-function parseInput(str){
-    const operators = ['+', '-', '/', '*'];
-    let left = "";
-    let right = ""
-    let operator = "";
-    for(let i = 0; i < str.length; i++){ // TO MOŻNA ZROBIĆ str.split()!!
-        if(operators.includes(str[i])){  // i zrobić to na osobnym branchu
-            left = str.slice(0, i);
-            right = str.slice(i + 1, -1);
-            operator = str[i];
-        }
-    }
-    // console.log([left, right, operator]);
-    return [left, right, operator];
 }
 
 addNumBtnFunctionality();
