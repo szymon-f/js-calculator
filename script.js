@@ -22,7 +22,7 @@ function divide(a, b){
     b = +b;
     if (b === 0){
         alert("You can't divide by zero 😡");
-        display.textContent = "";
+        currentOperation.textContent = "";
         leftOperand = "";
         rightOperand = "";
         operator = "";
@@ -53,24 +53,26 @@ const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
 const operatorBtns = document.querySelectorAll('.operator');
-const previousOperationP = document.querySelector('.previous-operation');
-const currentOperationP = document.querySelector('.current-operation');
+const previousOperation = document.querySelector('.previous-operation');
+const currentOperation = document.querySelector('.current-operation');
 
 let leftOperand = "";
 let rightOperand = "";
 let operator = "";
-let previousOperation = "";
+let lastOperation = "";
 
 function refreshDisplay(result){
     if(arguments.length === 0){
-        display.textContent = leftOperand + operator + rightOperand;
+        currentOperation.textContent = leftOperand + operator + rightOperand;
     } else {
-        display.textContent = result;
+        previousOperation.textContent = lastOperation;
+        currentOperation.textContent = result;
     }
 }
 
 function clearDisplay(){
-    display.textContent = "";
+    currentOperation.textContent = "";
+    previousOperation.textContent = "";
 }
 
 function addNumBtnFunctionality(){
@@ -91,6 +93,7 @@ function addOperatorBtnFunctionality(){
         button.addEventListener('click', () => {
             if(leftOperand.length !== 0 && operator.length !== 0  && rightOperand.length !== 0){
                 let result = operate(leftOperand, rightOperand, operator);
+                lastOperation = leftOperand + operator + rightOperand;
                 refreshDisplay(result);
                 leftOperand = result;
                 rightOperand = "";
@@ -119,6 +122,7 @@ function addEqualBtnFunctionality(){
             operator = "";
         } else {
             let result = operate(leftOperand, rightOperand, operator);
+            lastOperation = leftOperand + operator + rightOperand;
             refreshDisplay(result);
             leftOperand = result;
             rightOperand = "";

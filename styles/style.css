@@ -41,6 +41,9 @@ ul {
   font-size: 1.5rem;
   color: white;
 }
+.calculator-screen .previous-operation {
+  font-size: 1rem;
+}
 
 ul.buttons {
   justify-content: unset;
