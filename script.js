@@ -48,7 +48,7 @@ function operate(a, b, operator){
     }
 }
 
-const display = document.querySelector('.calculator-screen');
+// const display = document.querySelector('.calculator-screen');
 const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
