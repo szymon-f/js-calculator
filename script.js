@@ -112,10 +112,17 @@ function addClearBtnFunctionality(){
 
 function addEqualBtnFunctionality(){
     equalBtn.addEventListener('click', () => {
-        let result = operate(leftOperand, rightOperand, operator);
-        refreshDisplay(result);
-        leftOperand = result;
-        rightOperand = "";
+        if(leftOperand.length === 0 || rightOperand.length === 0){
+            refreshDisplay("");
+            leftOperand = "";
+            rightOperand = "";
+            operator = "";
+        } else {
+            let result = operate(leftOperand, rightOperand, operator);
+            refreshDisplay(result);
+            leftOperand = result;
+            rightOperand = "";
+        }
     })
 }
 
