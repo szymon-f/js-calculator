@@ -51,7 +51,7 @@ ul.buttons {
     gap: 2rem;
     justify-content: space-between;
 
-    li {
+    li.number, li#dot, li.operator, li#equal {
         background: yellow;
         border-radius: 1rem;
         // padding: 1rem;
@@ -72,8 +72,13 @@ ul.buttons {
 }
 
 #clear, #back {
-    padding: .2rem 2rem;
+    padding: .2rem 1rem;
     font-size: 1.2rem;
     cursor: pointer;
     margin-top: 1rem;
+}
+
+#dot {
+    margin-right: 0;
+    margin-left: 0;
 }
