@@ -53,6 +53,7 @@ const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
 const backBtn = document.querySelector('#back');
+const dotBtn = document.querySelector('#dot')
 const operatorBtns = document.querySelectorAll('.operator');
 const previousOperation = document.querySelector('.previous-operation');
 const currentOperation = document.querySelector('.current-operation');
@@ -86,6 +87,21 @@ function addNumBtnFunctionality(){
             }        
             refreshDisplay();
         })
+    })
+}
+
+function addDotBtnFunctionality(){
+    dotBtn.addEventListener('click', (button) => {
+        if(operator.length === 0){
+            if (!leftOperand.includes(".")){
+                leftOperand += ".";
+            }
+        } else {
+            if(!rightOperand.includes(".")){
+                rightOperand += ".";
+            }
+        }
+        refreshDisplay();
     })
 }
 
@@ -151,3 +167,4 @@ addOperatorBtnFunctionality();
 addEqualBtnFunctionality();
 addClearBtnFunctionality();
 addBackBtnFunctionality();
+addDotBtnFunctionality();

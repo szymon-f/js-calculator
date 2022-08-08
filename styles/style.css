@@ -25,7 +25,7 @@ ul {
 .calculator-body {
   background: grey;
   width: 20%;
-  height: 60%;
+  height: 70%;
   display: flex;
   flex-direction: column;
   align-items: center;
