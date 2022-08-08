@@ -52,6 +52,7 @@ function operate(a, b, operator){
 const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
+const backBtn = document.querySelector('#back');
 const operatorBtns = document.querySelectorAll('.operator');
 const previousOperation = document.querySelector('.previous-operation');
 const currentOperation = document.querySelector('.current-operation');
@@ -113,6 +114,21 @@ function addClearBtnFunctionality(){
     })
 }
 
+function addBackBtnFunctionality(){
+    backBtn.addEventListener('click', () => {
+        if(operator.length === 0){
+            leftOperand = leftOperand.slice(0, -1);
+            refreshDisplay();
+        } else if (rightOperand.length === 0){
+            operator = "";
+            refreshDisplay();
+        } else {
+            rightOperand = rightOperand.slice(0, -1);
+            refreshDisplay();
+        }
+    })
+}
+
 function addEqualBtnFunctionality(){
     equalBtn.addEventListener('click', () => {
         if(leftOperand.length === 0 || rightOperand.length === 0){
@@ -134,3 +150,4 @@ addNumBtnFunctionality();
 addOperatorBtnFunctionality();
 addEqualBtnFunctionality();
 addClearBtnFunctionality();
+addBackBtnFunctionality();

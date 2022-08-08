@@ -63,7 +63,13 @@ ul.buttons li:hover {
   background: rgb(194, 194, 16);
 }
 
-#clear {
+.bottom-btn {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+#clear, #back {
   padding: 0.2rem 2rem;
   font-size: 1.2rem;
   cursor: pointer;
