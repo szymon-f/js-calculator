@@ -1,82 +1,94 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  font-family: "lato", sans-serif;
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 ul {
   list-style: none;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-}
-
-.container.main-container {
-  height: 100%;
-  align-items: center;
-}
-
 .calculator-body {
-  background: grey;
-  width: 20%;
-  height: 70%;
+  background: rgb(140, 140, 140);
+  width: 20vw;
+  height: 50vh;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
 }
-
-.calculator-screen {
+.calculator-body .calculator-screen {
+  background: lightcyan;
+  padding: 0.5rem;
+  border: 2px solid black;
   width: 100%;
   height: 20%;
-  background: black;
-  margin-bottom: 2rem;
-  padding: 0.5rem;
+  border-radius: 0.3rem;
+  color: black;
   font-size: 1.5rem;
-  color: white;
 }
-.calculator-screen .previous-operation {
+.calculator-body .calculator-screen .previous-operation {
   font-size: 1rem;
 }
-
-ul.buttons {
-  justify-content: unset;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: space-between;
-}
-ul.buttons li.number, ul.buttons li#dot, ul.buttons li.operator, ul.buttons li#equal {
-  background: yellow;
-  border-radius: 1rem;
-  text-align: center;
-  cursor: pointer;
-  width: 20%;
-  font-size: 2rem;
-}
-ul.buttons li.number:hover, ul.buttons li#dot:hover, ul.buttons li.operator:hover, ul.buttons li#equal:hover {
-  background: rgb(194, 194, 16);
-}
-
-.bottom-btn {
+.calculator-body .calculator-btn-section {
   display: flex;
-  width: 100%;
-  gap: 1rem;
-}
-
-#clear, #back {
-  padding: 0.2rem 1rem;
-  font-size: 1.2rem;
-  cursor: pointer;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 1rem;
 }
+.calculator-body .big-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin: -0.5rem 0;
+  padding: 0;
+}
+.calculator-body ul li {
+  background: lightcyan;
+  border: 2px solid black;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  width: 20%;
+  height: 25%;
+  flex-grow: 1;
+}
+.calculator-body ul li:hover {
+  background: rgb(170, 196, 196);
+}
 
-#dot {
-  margin-right: 0;
-  margin-left: 0;
+#clear, #delete {
+  font-size: 1.3rem;
+  width: 50%;
+  padding: 1.5rem 0;
+}
+
+#clear {
+  background: pink;
+}
+#clear:hover {
+  background: rgb(200, 150, 160);
+}
+
+#delete {
+  background: lightblue;
+}
+#delete:hover {
+  background: rgb(130, 165, 180);
 }/*# sourceMappingURL=style.css.map */

@@ -52,7 +52,7 @@ function operate(a, b, operator){
 const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
-const backBtn = document.querySelector('#back');
+const backBtn = document.querySelector('#delete');
 const dotBtn = document.querySelector('#dot')
 const operatorBtns = document.querySelectorAll('.operator');
 const previousOperation = document.querySelector('.previous-operation');
