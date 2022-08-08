@@ -148,10 +148,11 @@ function addBackBtnFunctionality(){
 function addEqualBtnFunctionality(){
     equalBtn.addEventListener('click', () => {
         if(leftOperand.length === 0 || rightOperand.length === 0){
-            refreshDisplay("");
+            lastOperation = "";
             leftOperand = "";
             rightOperand = "";
             operator = "";
+            refreshDisplay("");
         } else {
             let result = operate(leftOperand, rightOperand, operator);
             lastOperation = leftOperand + operator + rightOperand;
