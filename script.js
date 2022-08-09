@@ -43,12 +43,10 @@ function operate(a, b, operator){
         case "/":
             return divide(a, b);
         default:
-            alert("don't input = before an expression to evaluate!")
             return ""
     }
 }
 
-// const display = document.querySelector('.calculator-screen');
 const numBtns = document.querySelectorAll('.number');
 const equalBtn = document.querySelector("#equal");
 const clearBtn = document.querySelector('#clear');
@@ -112,7 +110,7 @@ function addOperatorBtnFunctionality(){
                 let result = operate(leftOperand, rightOperand, operator);
                 lastOperation = leftOperand + operator + rightOperand;
                 refreshDisplay(result);
-                leftOperand = result;
+                leftOperand = result.toString();
                 rightOperand = "";
             }
             operator = button.textContent;
@@ -157,8 +155,9 @@ function addEqualBtnFunctionality(){
             let result = operate(leftOperand, rightOperand, operator);
             lastOperation = leftOperand + operator + rightOperand;
             refreshDisplay(result);
-            leftOperand = result;
+            leftOperand = result.toString();
             rightOperand = "";
+            operator = "";
         }
     })
 }
