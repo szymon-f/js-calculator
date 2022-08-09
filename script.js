@@ -162,9 +162,27 @@ function addEqualBtnFunctionality(){
     })
 }
 
+function addKeyboardFunctionality(){
+    const validKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+                        '-', '=', '/', '.', '*', '+', ',', 'Enter', 'Backspace']
+    window.addEventListener('keydown', e => {
+        if(validKeys.includes(e.key)){
+            let pressedKey;
+            if(e.key === ","){
+                pressedKey = '.';
+                console.log(pressedKey);
+            } else {
+                pressedKey = e.key;
+                console.log(pressedKey);
+            }
+        }
+    })
+}
+
 addNumBtnFunctionality();
 addOperatorBtnFunctionality();
 addEqualBtnFunctionality();
 addClearBtnFunctionality();
 addBackBtnFunctionality();
 addDotBtnFunctionality();
+addKeyboardFunctionality();
