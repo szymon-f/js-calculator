@@ -75,21 +75,39 @@ function clearDisplay(){
     previousOperation.textContent = "";
 }
 
-function addNumBtnFunctionality(){
-    numBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            if(operator.length === 0){
-                leftOperand += button.textContent;
-            } else {
-                rightOperand += button.textContent;
-            }        
-            refreshDisplay();
+function addNumBtnFunctionality(num){
+    if(arguments.length === 0){
+        numBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                if(operator.length === 0){
+                    leftOperand += button.textContent;
+                } else {
+                    rightOperand += button.textContent;
+                }        
+                refreshDisplay();
+            })
         })
-    })
+    } else {
+        operator.length === 0 ? leftOperand+= num : rightOperand += num;
+        refreshDisplay();
+    }
 }
 
-function addDotBtnFunctionality(){
-    dotBtn.addEventListener('click', (button) => {
+function addDotBtnFunctionality(_){
+    if(arguments.length === 0){
+        dotBtn.addEventListener('click', () => {
+            if(operator.length === 0){
+                if (!leftOperand.includes(".")){
+                    leftOperand += ".";
+                }
+            } else {
+                if(!rightOperand.includes(".")){
+                    rightOperand += ".";
+                }
+            }
+            refreshDisplay();
+        })
+    } else {
         if(operator.length === 0){
             if (!leftOperand.includes(".")){
                 leftOperand += ".";
@@ -100,23 +118,35 @@ function addDotBtnFunctionality(){
             }
         }
         refreshDisplay();
-    })
+    }
 }
 
-function addOperatorBtnFunctionality(){
-    operatorBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            if(leftOperand.length !== 0 && operator.length !== 0  && rightOperand.length !== 0){
-                let result = operate(leftOperand, rightOperand, operator);
-                lastOperation = leftOperand + operator + rightOperand;
-                refreshDisplay(result);
-                leftOperand = result.toString();
-                rightOperand = "";
-            }
-            operator = button.textContent;
-            refreshDisplay();
+function addOperatorBtnFunctionality(oper){
+    if(arguments.length === 0){
+        operatorBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                if(leftOperand.length !== 0 && operator.length !== 0  && rightOperand.length !== 0){
+                    let result = operate(leftOperand, rightOperand, operator);
+                    lastOperation = leftOperand + operator + rightOperand;
+                    refreshDisplay(result);
+                    leftOperand = result.toString();
+                    rightOperand = "";
+                }
+                operator = button.textContent;
+                refreshDisplay();
+            })
         })
-    })
+    } else {
+        if(leftOperand.length !== 0 && operator.length !== 0  && rightOperand.length !== 0){
+            let result = operate(leftOperand, rightOperand, operator);
+            lastOperation = leftOperand + operator + rightOperand;
+            refreshDisplay(result);
+            leftOperand = result.toString();
+            rightOperand = "";
+        }
+        operator = oper;
+        refreshDisplay();
+    }
 }
 
 function addClearBtnFunctionality(){
@@ -128,8 +158,21 @@ function addClearBtnFunctionality(){
     })
 }
 
-function addBackBtnFunctionality(){
-    backBtn.addEventListener('click', () => {
+function addBackBtnFunctionality(_){
+    if(arguments.length === 0){
+        backBtn.addEventListener('click', () => {
+            if(operator.length === 0){
+                leftOperand = leftOperand.slice(0, -1);
+                refreshDisplay();
+            } else if (rightOperand.length === 0){
+                operator = "";
+                refreshDisplay();
+            } else {
+                rightOperand = rightOperand.slice(0, -1);
+                refreshDisplay();
+            }
+        })
+    } else {
         if(operator.length === 0){
             leftOperand = leftOperand.slice(0, -1);
             refreshDisplay();
@@ -140,11 +183,28 @@ function addBackBtnFunctionality(){
             rightOperand = rightOperand.slice(0, -1);
             refreshDisplay();
         }
-    })
+    }
 }
 
-function addEqualBtnFunctionality(){
-    equalBtn.addEventListener('click', () => {
+function addEqualBtnFunctionality(_){
+    if(arguments.length === 0){
+        equalBtn.addEventListener('click', () => {
+            if(leftOperand.length === 0 || rightOperand.length === 0){
+                lastOperation = "";
+                leftOperand = "";
+                rightOperand = "";
+                operator = "";
+                refreshDisplay("");
+            } else {
+                let result = operate(leftOperand, rightOperand, operator);
+                lastOperation = leftOperand + operator + rightOperand;
+                refreshDisplay(result);
+                leftOperand = result.toString();
+                rightOperand = "";
+                operator = "";
+            }
+        })
+    } else {
         if(leftOperand.length === 0 || rightOperand.length === 0){
             lastOperation = "";
             leftOperand = "";
@@ -159,22 +219,37 @@ function addEqualBtnFunctionality(){
             rightOperand = "";
             operator = "";
         }
-    })
+    }
 }
 
 function addKeyboardFunctionality(){
-    const validKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-                        '-', '=', '/', '.', '*', '+', ',', 'Enter', 'Backspace']
+    const validNumKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+    const validOperatorKeys = ['-', '/', '*', '+']
+    const validSpecialKeys = ['=', '.', ',', 'Enter', 'Backspace']
     window.addEventListener('keydown', e => {
-        if(validKeys.includes(e.key)){
-            let pressedKey;
-            if(e.key === ","){
-                pressedKey = '.';
-                console.log(pressedKey);
+        if(validNumKeys.includes(e.key) || validOperatorKeys.includes(e.key) || validSpecialKeys.includes(e.key)){
+            let pressedKey = e.key;
+            if(validNumKeys.includes(pressedKey)){
+                addNumBtnFunctionality(pressedKey);
+            } else if (validOperatorKeys.includes(pressedKey)){
+                addOperatorBtnFunctionality(pressedKey);
             } else {
-                pressedKey = e.key;
-                console.log(pressedKey);
+                e.key === ',' ? pressedKey = '.' :pressedKey = pressedKey;
+                e.key === 'Enter' ? pressedKey = '=' : pressedKey = pressedKey;
+                switch (pressedKey){
+                    case '=':
+                        addEqualBtnFunctionality('');
+                        break;
+                    case 'Backspace':
+                        addBackBtnFunctionality('')
+                        break;
+                    case '.':
+                        addDotBtnFunctionality('');
+                        break;
+                }
+
             }
+
         }
     })
 }
