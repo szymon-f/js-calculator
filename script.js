@@ -84,13 +84,12 @@ function addNumBtnFunctionality(num){
                 } else {
                     rightOperand += button.textContent;
                 }        
-                refreshDisplay();
             })
         })
     } else {
         operator.length === 0 ? leftOperand+= num : rightOperand += num;
-        refreshDisplay();
     }
+    refreshDisplay();
 }
 
 function addDotBtnFunctionality(_){
@@ -105,7 +104,6 @@ function addDotBtnFunctionality(_){
                     rightOperand += ".";
                 }
             }
-            refreshDisplay();
         })
     } else {
         if(operator.length === 0){
@@ -117,8 +115,8 @@ function addDotBtnFunctionality(_){
                 rightOperand += ".";
             }
         }
-        refreshDisplay();
     }
+    refreshDisplay();
 }
 
 function addOperatorBtnFunctionality(oper){
@@ -133,7 +131,6 @@ function addOperatorBtnFunctionality(oper){
                     rightOperand = "";
                 }
                 operator = button.textContent;
-                refreshDisplay();
             })
         })
     } else {
@@ -145,8 +142,8 @@ function addOperatorBtnFunctionality(oper){
             rightOperand = "";
         }
         operator = oper;
-        refreshDisplay();
     }
+    refreshDisplay();
 }
 
 function addClearBtnFunctionality(){
@@ -163,27 +160,22 @@ function addBackBtnFunctionality(_){
         backBtn.addEventListener('click', () => {
             if(operator.length === 0){
                 leftOperand = leftOperand.slice(0, -1);
-                refreshDisplay();
             } else if (rightOperand.length === 0){
                 operator = "";
-                refreshDisplay();
             } else {
                 rightOperand = rightOperand.slice(0, -1);
-                refreshDisplay();
             }
         })
     } else {
         if(operator.length === 0){
             leftOperand = leftOperand.slice(0, -1);
-            refreshDisplay();
         } else if (rightOperand.length === 0){
             operator = "";
-            refreshDisplay();
         } else {
             rightOperand = rightOperand.slice(0, -1);
-            refreshDisplay();
         }
     }
+    refreshDisplay();
 }
 
 function addEqualBtnFunctionality(_){
